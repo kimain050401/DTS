@@ -8,6 +8,19 @@
 </head>
 <body>
     <script>
+        function getCookie(cName) {
+            cName = cName + '=';
+            var cookieData = document.cookie;
+            var start = cookieData.indexOf(cName);
+            var cValue = '';
+            if (start != -1) {
+                start += cName.length;
+                var end = cookieData.indexOf(';', start);
+                if (end == -1) end = cookieData.length;
+                cValue = cookieData.substring(start, end);
+            }
+            return unescape(cValue);
+        }
         function saveCookie() {
             var date = new Date();
             date.setDate(date.getDate() + 7);
@@ -27,20 +40,10 @@
             document.cookie = willCookie;
             console.log(willCookie);
         }
-        function getCookie(cName) {
-            cName = cName + '=';
-            var cookieData = document.cookie;
-            var start = cookieData.indexOf(cName);
-            var cValue = '';
-            if (start != -1) {
-                start += cName.length;
-                var end = cookieData.indexOf(';', start);
-                if (end == -1) end = cookieData.length;
-                cValue = cookieData.substring(start, end);
-            }
-            return unescape(cValue);
-        }
+        var cookieData = document.cookie;
+        document.getElementById("console").innerText = cookieData;
     </script>
     <a href="https://tracker.delivery/#/:carrier_id/:track_id" target="_blank">배송조회</a>
+    <a>></a><a id="console">여기에 나타납니다.</a><a><</a>
 </body>
 </html>
