@@ -30,40 +30,40 @@
         }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
-<body>
+    </head>
+    <body>
     <script>
         function getCookie(cName){
-            cName = cName + '=';
-            var cookieData = document.cookie;
-            var start = cookieData.indexOf(cName);
-            var cValue = '';
-            if (start != -1){
-                start += cName.length;
-                var end = cookieData.indexOf(';', start);
-                if (end == -1) end = cookieData.length;
-                cValue = cookieData.substring(start, end);
-            }
-            return unescape(cValue);
+        cName = cName + '=';
+        var cookieData = document.cookie;
+        var start = cookieData.indexOf(cName);
+        var cValue = '';
+        if (start != -1){
+            start += cName.length;
+            var end = cookieData.indexOf(';', start);
+            if (end == -1) end = cookieData.length;
+            cValue = cookieData.substring(start, end);
+        }
+        return unescape(cValue);
         }
         function saveCookie(){
-            var date = new Date();
-            date.setDate(date.getDate() + 7);
-            var willCookie = "";
-            if(getCookie("DTSvalue") != ""){
-                willCookie += "DTSvalue=" + getCookie("DTSvalue") + "$" + document.getElementById("DTSnumber").value + ":" + document.getElementById("DTSdelivery").value + ";";
-            } else{
-                willCookie += "DTSvalue=" + document.getElementById("DTSnumber").value + ":" + document.getElementById("DTSdelivery").value + ";";
-            }
-            willCookie += "expires=" + date.toUTCString();
-            document.cookie = willCookie;
-            console.log(willCookie);
-            location.reload();
-            // willCookie = "";
-            // willCookie += "DTSvalue" + getCookie("DTSindex") + "=" + document.getElementById('DTSvalue').value + ";";
-            // willCookie += "expires=" + date.toUTCString();
-            // document.cookie = willCookie;
-            // console.log(willCookie);
+        var date = new Date();
+        date.setDate(date.getDate() + 7);
+        var willCookie = "";
+        if(getCookie("DTSvalue") != ""){
+            willCookie += "DTSvalue=" + getCookie("DTSvalue") + "$" + document.getElementById("DTSnumber").value + ":" + document.getElementById("DTSdelivery").value + ";";
+        } else{
+            willCookie += "DTSvalue=" + document.getElementById("DTSnumber").value + ":" + document.getElementById("DTSdelivery").value + ";";
+        }
+        willCookie += "expires=" + date.toUTCString();
+        document.cookie = willCookie;
+        console.log(willCookie);
+        location.reload();
+        // willCookie = "";
+        // willCookie += "DTSvalue" + getCookie("DTSindex") + "=" + document.getElementById('DTSvalue').value + ";";
+        // willCookie += "expires=" + date.toUTCString();
+        // document.cookie = willCookie;
+        // console.log(willCookie);
         }
         function delCookie(){
             var date = new Date();
@@ -75,81 +75,96 @@
             console.log(willCookie);
             location.reload();
         }
-    </script>
-    <br><br><br>
-    <div style="display: inline-block;">
-        <div class="input-group" style="width: fit-content;">
-            <select id="DTSdelivery" class="form-select" style="width: fit-content;">
-                <option value="kr.cjlogistics">CJ대한통운</option>
-                <option value="kr.epost">우체국 택배</option>
-                <option value="kr.hanjin">한진택배</option>
-                <option value="kr.logen">로젠택배</option>
-                <option value="kr.lotte">롯데택배</option>
-                <option value="kr.kdexp">경동택배</option>
-                <option value="de.dhl">DHL</option>
-                <option value="jp.sagawa">Sagawa</option>
-                <option value="jp.yamato">Kuroneko Yamato</option>
-                <option value="jp.yuubin">Japan Post</option>
-                <option value="kr.chunilps">천일택배</option>
-                <option value="kr.cupost">CU 편의점택배</option>
-                <option value="kr.cvsnet">GS Postbox 택배</option>
-                <option value="kr.cway">CWAY (Woori Express)</option>
-                <option value="kr.daesin">대신택배</option>
-                <option value="kr.hanips">한의사랑택배</option>
-                <option value="kr.hdexp">합동택배</option>
-                <option value="kr.homepick">홈픽</option>
-                <option value="kr.honamlogis">한서호남택배</option>
-                <option value="kr.ilyanglogis">일양로지스</option>
-                <option value="kr.kunyoung">건영택배</option>
-                <option value="kr.slx">SLX</option>
-                <option value="kr.swgexp">성원글로벌카고</option>
-                <option value="nl.tnt">TNT</option>
-                <option value="un.upu.ems">EMS</option>
-                <option value="us.fedex">Fedex</option>
-                <option value="us.ups">UPS</option>
-                <option value="us.usps">USPS</option>
-            </select>
-            <input class="form-control" style="width: fit-content;" id="DTSnumber" type="text" inputmode="numeric" placeholder="송장번호" required>
-        </div>
-    </div>
-    <br>
-    <input class="btn btn-primary" style="margin-top: 10px;" type="button" onclick="saveCookie()" value="등록하기">
-    <input class="btn btn-danger" style="margin-top: 10px;" type="button" onclick="delCookie()" value="모두 지우기">
-    <!-- <br><br><a>쿠키 : </a><a id="consoles"></a><br><br> -->
-    <br><br><br>
-    <div id="element"></div>
-    <script>
-        // document.getElementById("consoles").innerText = getCookie("DTSvalue");
-        if(getCookie("DTSvalue").includes("$") == true){
-            var cookies = getCookie("DTSvalue").split("$")
-            console.log(getCookie("DTSvalue"))
-            console.log(cookies)
-            for(var i=0; i<cookies.length; i++){
-                console.log(i)
-                var temp = cookies[i].split(":")
-                console.log(temp)
-                fetch("https://apis.tracker.delivery/carriers/" + temp[1] + "/tracks/" + temp[0]).then((response) => response.json()).then(response=>{
-                    var color = ""
-                    if(response.state.text == "배달완료") color = "btn btn-success"
-                    else color = "btn btn-warning"
-                    document.getElementById("element").innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>'
-                    document.getElementById("element").innerHTML += '<div onclick="window.open(' + "'https://tracker.delivery/#/" + temp[1] + '/' + temp[0] + "'" + ')" class="stats ' + color + '"><a>' + temp[0] + ' - </a><a>' + response.state.text +'</a></div>'
-                    document.getElementById("element").innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><br>'
-                })
-            }
-        } else{
-            var cookies = getCookie("DTSvalue")
-            console.log(getCookie("DTSvalue"))
-            console.log(cookies)
-            var temp = cookies.split(":")
-            console.log(temp)
-            fetch("https://apis.tracker.delivery/carriers/" + temp[1] + "/tracks/" + temp[0]).then((response) => response.json()).then(response=>{
-                var color = ""
-                if(response.state.text == "배달완료") color = "btn btn-success"
-                else color = "btn btn-warning"
-                document.getElementById("element").innerHTML += '<div onclick="window.open(' + "'https://tracker.delivery/#/" + temp[1] + '/' + temp[0] + "'" + ')" class="stats ' + color + '"><a>' + temp[0] + ' - </a><a>' + response.state.text +'</a></div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><br>'
-            })
+        function copy(thisid){
+            var dummy = document.createElement("input");
+            var text = "DTS로 택배를 공유합니다! https://yaza.live/" + document.getElementById('_' + thisid).innerText + "/" + thisid;
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            alert("복사되었어요! 공유할 사람에게 불혀넣으면 돼요!")
+        }
+        function alerts(thisid){
+        fetch("https://apis.tracker.delivery/carriers/" + document.getElementById('_' + thisid).innerText + "/tracks/" + thisid).then((response) => response.json()).then(response=>{
+            alert(response.to.name)
+        })
         }
     </script>
+    <br><br><br>
+  <div style="display: inline-block;">
+      <div class="input-group" style="width: fit-content;">
+          <select id="DTSdelivery" class="form-select" style="width: fit-content;">
+              <option value="kr.cjlogistics">CJ대한통운</option>
+              <option value="kr.epost">우체국 택배</option>
+              <option value="kr.hanjin">한진택배</option>
+              <option value="kr.logen">로젠택배</option>
+              <option value="kr.lotte">롯데택배</option>
+              <option value="kr.kdexp">경동택배</option>
+              <option value="de.dhl">DHL</option>
+              <option value="jp.sagawa">Sagawa</option>
+              <option value="jp.yamato">Kuroneko Yamato</option>
+              <option value="jp.yuubin">Japan Post</option>
+              <option value="kr.chunilps">천일택배</option>
+              <option value="kr.cupost">CU 편의점택배</option>
+              <option value="kr.cvsnet">GS Postbox 택배</option>
+              <option value="kr.cway">CWAY (Woori Express)</option>
+              <option value="kr.daesin">대신택배</option>
+              <option value="kr.hanips">한의사랑택배</option>
+              <option value="kr.hdexp">합동택배</option>
+              <option value="kr.homepick">홈픽</option>
+              <option value="kr.honamlogis">한서호남택배</option>
+              <option value="kr.ilyanglogis">일양로지스</option>
+              <option value="kr.kunyoung">건영택배</option>
+              <option value="kr.slx">SLX</option>
+              <option value="kr.swgexp">성원글로벌카고</option>
+              <option value="nl.tnt">TNT</option>
+              <option value="un.upu.ems">EMS</option>
+              <option value="us.fedex">Fedex</option>
+              <option value="us.ups">UPS</option>
+              <option value="us.usps">USPS</option>
+          </select>
+          <input class="form-control" style="width: fit-content;" id="DTSnumber" type="text" inputmode="numeric" placeholder="송장번호" required>
+      </div>
+  </div>
+  <br>
+  <input class="btn btn-primary" style="margin-top: 10px;" type="button" onclick="saveCookie()" value="등록하기">
+  <input class="btn btn-danger" style="margin-top: 10px;" type="button" onclick="delCookie()" value="모두 지우기">
+  <!-- <br><br><a>쿠키 : </a><a id="consoles"></a><br><br> -->
+  <br><br><br>
+  <div id="element"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+  <script>
+    if(getCookie("DTSvalue").includes("$") == true){
+        var cookies = getCookie("DTSvalue").split("$");
+        cookies.forEach(cookie => {
+        const temp = cookie.split(":");
+        axios.get(`https://apis.tracker.delivery/carriers/${temp[1]}/tracks/${temp[0]}`)
+        .then(response => {
+            let color = "";
+            if(response.data.state.text === '배달완료') color = 'btn btn-success';
+            else color = 'btn btn-warning';
+            document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="alerts(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>';
+            document.getElementById("element").innerHTML += '<div onclick="window.open(' + "'https://tracker.delivery/#/" + temp[1] + '/' + temp[0] + "'" + ')" class="stats ' + color + '"><a>' + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>' + response.data.state.text +'</a></div>';
+            document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="copy(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><br>';
+        })
+        .catch(error => {
+            document.getElementById("element").innerHTML += '<div onclick="window.open(' + "'https://tracker.delivery/#/" + temp[1] + '/' + temp[0] + "'" + ')" class="stats btn btn-danger"><a>' + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>운송장을 찾을 수 없음</a></div>';
+        });
+      });
+    } else {
+        var cookies = getCookie("DTSvalue");
+        console.log(getCookie("DTSvalue"));
+        console.log(cookies);
+        var temp = cookies.split(":");
+        console.log(temp);
+        fetch("https://apis.tracker.delivery/carriers/" + temp[1] + "/tracks/" + temp[0]).then((response) => response.json()).then(response=>{
+            var color = "";
+            if(response.state.text == "배달완료") color = "btn btn-success";
+            else color = "btn btn-warning";
+            document.getElementById("element").innerHTML += '<div onclick="window.open(' + "'https://tracker.delivery/#/" + temp[1] + '/' + temp[0] + "'" + ')" class="stats ' + color + '"><a>' + temp[0] + ' - </a><a>' + response.state.text +'</a></div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><br>';
+        });
+    }
+  </script>
 </body>
 </html>
