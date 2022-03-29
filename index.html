@@ -49,10 +49,12 @@
             document.cookie = willCookie;
             console.log(willCookie);
         }
-        document.getElementById("console").innerText = getCookie("DTSvalue");
     </script>
     <a href="https://tracker.delivery/#/:carrier_id/:track_id" target="_blank">배송조회</a>
-    <a>></a><a id="console">여기에 나타납니다.</a><a><</a><br>
+    <a>></a><a id="consoles">여기에 나타납니다.</a><a><</a><br>
+    <script>
+        document.getElementById("consoles").innerText = getCookie("DTSvalue");
+    </script>
     <input id="DTSnumber" type="number" inputmode="numeric" placeholder="송장번호">
     <br>
     <input id="DTSdelivery" type="text" placeholder="배송회사 코드">
