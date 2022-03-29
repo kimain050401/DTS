@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DTS</title>
+    <style>
+        html, body{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <script>
@@ -52,7 +57,7 @@
     </script>
     <div id="element">
     </div>
-    <a>></a><a id="consoles">여기에 나타납니다.</a><a><</a><br>
+    <a>쿠키 : </a><a id="consoles"></a><br>
     <script>
         document.getElementById("consoles").innerText = getCookie("DTSvalue");
         if(getCookie("DTSvalue").includes("$") == true){
