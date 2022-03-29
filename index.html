@@ -57,14 +57,19 @@
         document.getElementById("consoles").innerText = getCookie("DTSvalue");
         if(getCookie("DTSvalue").includes("$") == true){
             var cookies = getCookie("DTSvalue").split("$")
+            console.log(getCookie("DTSvalue"))
+            console.log(cookies)
+            for(var i=0; i<cookies.length; i++){
+                console.log(i)
+                var temp = cookies[i].split(":")
+                console.log(temp)
+                document.getElementById("element").innerHTML += '<a href="https://tracker.delivery/#/' + temp[1] + '/' + temp[0] + '" target="_blank">' + temp[0] + '</a><br>'
+            }
         } else{
             var cookies = getCookie("DTSvalue")
-        }
-        console.log(getCookie("DTSvalue"))
-        console.log(cookies)
-        for(var i=0; i<cookies.length; i++){
-            console.log(i)
-            var temp = cookies[i].split(":")
+            console.log(getCookie("DTSvalue"))
+            console.log(cookies)
+            var temp = cookies.split(":")
             console.log(temp)
             document.getElementById("element").innerHTML += '<a href="https://tracker.delivery/#/' + temp[1] + '/' + temp[0] + '" target="_blank">' + temp[0] + '</a><br>'
         }
