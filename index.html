@@ -8,12 +8,12 @@
 </head>
 <body>
     <script>
-        function getCookie(cName) {
+        function getCookie(cName){
             cName = cName + '=';
             var cookieData = document.cookie;
             var start = cookieData.indexOf(cName);
             var cValue = '';
-            if (start != -1) {
+            if (start != -1){
                 start += cName.length;
                 var end = cookieData.indexOf(';', start);
                 if (end == -1) end = cookieData.length;
@@ -21,29 +21,43 @@
             }
             return unescape(cValue);
         }
-        function saveCookie() {
+        function saveCookie(){
             var date = new Date();
             date.setDate(date.getDate() + 7);
             var willCookie = "";
-            if(getCookie("DTSindex") != ""){
-                willCookie += "DTSindex=" + String(Number(getCookie("DTSindex")) + 1) + ";";
+            if(getCookie("DTSvalue") != ""){
+                willCookie += "DTSvalue=" + getCookie("DTSvalue") + "$" + document.getElementById("DTSnumber").value + ":" + document.getElementById("DTSdelivery").value + ";";
             } else{
-                willCookie += "DTSindex=" + "1" + ";";
+                willCookie += "DTSvalue=" + document.getElementById("DTSnumber").value + ":" + document.getElementById("DTSdelivery").value + ";";
             }
             willCookie += "expires=" + date.toUTCString();
             document.cookie = willCookie;
             console.log(willCookie);
 
-            willCookie = "";
-            willCookie += "DTSvalue" + getCookie("DTSindex") + "=" + document.getElementById('DTSvalue').value + ";";
+            // willCookie = "";
+            // willCookie += "DTSvalue" + getCookie("DTSindex") + "=" + document.getElementById('DTSvalue').value + ";";
+            // willCookie += "expires=" + date.toUTCString();
+            // document.cookie = willCookie;
+            // console.log(willCookie);
+        }
+        function delCookie(){
+            var date = new Date();
+            date.setDate(date.getDate() + 7);
+            var willCookie = "";
+            willCookie += "DTSvalue=" + ";";
             willCookie += "expires=" + date.toUTCString();
             document.cookie = willCookie;
             console.log(willCookie);
         }
-        var cookieData = document.cookie;
-        document.getElementById("console").innerText = cookieData;
+        document.getElementById("console").innerText = getCookie("DTSvalue");
     </script>
     <a href="https://tracker.delivery/#/:carrier_id/:track_id" target="_blank">배송조회</a>
-    <a>></a><a id="console">여기에 나타납니다.</a><a><</a>
+    <a>></a><a id="console">여기에 나타납니다.</a><a><</a><br>
+    <input id="DTSnumber" type="number" inputmode="numeric" placeholder="송장번호">
+    <br>
+    <input id="DTSdelivery" type="text" placeholder="배송회사 코드">
+    <br>
+    <input type="button" onclick="saveCookie()" value="등록하기">
+    <input type="button" onclick="delCookie()" value="모두 지우기">
 </body>
 </html>
