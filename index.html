@@ -79,10 +79,10 @@
             console.log(cookies)
             var temp = cookies.split(":")
             console.log(temp)
-            fetch("https://apis.tracker.delivery/carriers/" + temp[1] + "/tracks/" + temp[0]).then((response) =>
-                console.log(response)
+        fetch("https://apis.tracker.delivery/carriers/" + temp[1] + "/tracks/" + temp[0]).then((response) => response.json()).then(response=>{
+            console.log(response.state.text)
+        })
                 // document.getElementById("element").innerHTML += '<a>' + temp[0] + ' - </a><a>' + response +' - </a><a href="https://tracker.delivery/#/' + temp[1] + '/' + temp[0] + '" target="_blank">자세히보기</a><br>'
-            );
         }
     </script>
     <input id="DTSnumber" type="number" inputmode="numeric" placeholder="송장번호">
