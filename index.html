@@ -49,19 +49,18 @@
             document.cookie = willCookie;
             console.log(willCookie);
         }
-        var cookies = getCookie("DTSvalue").split("$")
-        for(var i in cookies){
-            var temp = i.split(":")
-            document.getElementById("element").innerHTML += '<a href="https://tracker.delivery/#/' + temp[1] + '/' + temp[0] + '" target="_blank">' + temp[0] + '</a><br>'
-        }
     </script>
     <div id="element">
-
     </div>
     <a href="https://tracker.delivery/#/:carrier_id/:track_id" target="_blank">배송조회</a>
     <a>></a><a id="consoles">여기에 나타납니다.</a><a><</a><br>
     <script>
         document.getElementById("consoles").innerText = getCookie("DTSvalue");
+        var cookies = getCookie("DTSvalue").split("$")
+        for(var i in cookies){
+            var temp = i.split(":")
+            document.getElementById("element").innerHTML += '<a href="https://tracker.delivery/#/' + temp[1] + '/' + temp[0] + '" target="_blank">' + temp[0] + '</a><br>'
+        }
     </script>
     <input id="DTSnumber" type="number" inputmode="numeric" placeholder="송장번호">
     <br>
