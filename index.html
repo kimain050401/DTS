@@ -12,14 +12,17 @@
             var date = new Date();
             date.setDate(date.getDate() + 7);
             var willCookie = "";
-            // if(getCookie("DTSindex") != "")
-            willCookie += "DTSindex=" + String(Number(getCookie("DTSindex")) + 1) + ";";
+            if(getCookie("DTSindex") != ""){
+                willCookie += "DTSindex=" + String(Number(getCookie("DTSindex")) + 1) + ";";
+            } else{
+                willCookie += "DTSindex=" + "1" + ";";
+            }
             willCookie += "expires=" + date.toUTCString();
             document.cookie = willCookie;
             console.log(willCookie);
 
             willCookie = "";
-            willCookie += "userID=" + document.getElementById('id1').value + ";";
+            willCookie += "DTSvalue" + getCookie("DTSindex") + "=" + document.getElementById('DTSvalue').value + ";";
             willCookie += "expires=" + date.toUTCString();
             document.cookie = willCookie;
             console.log(willCookie);
@@ -37,7 +40,6 @@
             }
             return unescape(cValue);
         }
-        alert(getCookie("DTSindex"))
     </script>
     <a href="https://tracker.delivery/#/:carrier_id/:track_id" target="_blank">배송조회</a>
 </body>
