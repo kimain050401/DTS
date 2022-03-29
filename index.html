@@ -6,10 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DTS</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
         html, body{
             text-align: center;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .stats{
+            display: inline-block;
+            border-radius: 5px;
+            width: fit-content;
+            color: white;
+            padding: 3px 10px 3px 10px;
+            margin: 2px;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
     <script>
@@ -56,11 +67,50 @@
             location.reload();
         }
     </script>
-    <div id="element">
+    <br><br>
+    <div style="display: inline-block;">
+        <div class="input-group" style="width: fit-content;">
+            <select id="DTSdelivery" class="form-select" style="width: fit-content;">
+                <option value="kr.cjlogistics">CJ대한통운</option>
+                <option value="kr.epost">우체국 택배</option>
+                <option value="kr.hanjin">한진택배</option>
+                <option value="kr.logen">로젠택배</option>
+                <option value="kr.lotte">롯데택배</option>
+                <option value="kr.kdexp">경동택배</option>
+                <option value="de.dhl">DHL</option>
+                <option value="jp.sagawa">Sagawa</option>
+                <option value="jp.yamato">Kuroneko Yamato</option>
+                <option value="jp.yuubin">Japan Post</option>
+                <option value="kr.chunilps">천일택배</option>
+                <option value="kr.cupost">CU 편의점택배</option>
+                <option value="kr.cvsnet">GS Postbox 택배</option>
+                <option value="kr.cway">CWAY (Woori Express)</option>
+                <option value="kr.daesin">대신택배</option>
+                <option value="kr.hanips">한의사랑택배</option>
+                <option value="kr.hdexp">합동택배</option>
+                <option value="kr.homepick">홈픽</option>
+                <option value="kr.honamlogis">한서호남택배</option>
+                <option value="kr.ilyanglogis">일양로지스</option>
+                <option value="kr.kunyoung">건영택배</option>
+                <option value="kr.slx">SLX</option>
+                <option value="kr.swgexp">성원글로벌카고</option>
+                <option value="nl.tnt">TNT</option>
+                <option value="un.upu.ems">EMS</option>
+                <option value="us.fedex">Fedex</option>
+                <option value="us.ups">UPS</option>
+                <option value="us.usps">USPS</option>
+            </select>
+            <input class="form-control" style="width: fit-content;" id="DTSnumber" type="text" inputmode="numeric" placeholder="송장번호" required>
+        </div>
     </div>
-    <a>쿠키 : </a><a id="consoles"></a><br>
+    <br>
+    <input class="btn btn-primary" style="margin-top: 10px;" type="button" onclick="saveCookie()" value="등록하기">
+    <input class="btn btn-danger" style="margin-top: 10px;" type="button" onclick="delCookie()" value="모두 지우기">
+    <!-- <br><br><a>쿠키 : </a><a id="consoles"></a><br><br> -->
+    <br><br><br>
+    <div id="element"></div>
     <script>
-        document.getElementById("consoles").innerText = getCookie("DTSvalue");
+        // document.getElementById("consoles").innerText = getCookie("DTSvalue");
         if(getCookie("DTSvalue").includes("$") == true){
             var cookies = getCookie("DTSvalue").split("$")
             console.log(getCookie("DTSvalue"))
@@ -70,7 +120,10 @@
                 var temp = cookies[i].split(":")
                 console.log(temp)
                 fetch("https://apis.tracker.delivery/carriers/" + temp[1] + "/tracks/" + temp[0]).then((response) => response.json()).then(response=>{
-                    document.getElementById("element").innerHTML += '<a>' + temp[0] + ' - </a><a>' + response.state.text +' - </a><a href="https://tracker.delivery/#/' + temp[1] + '/' + temp[0] + '" target="_blank">자세히보기</a><br>'
+                    var color = ""
+                    if(response.state.text == "배달완료") color = "btn btn-success"
+                    else color = "btn btn-warning"
+                    document.getElementById("element").innerHTML += '<div onclick="window.open(' + "'https://tracker.delivery/#/" + temp[1] + '/' + temp[0] + "'" + ')" class="stats ' + color + '"><a>' + temp[0] + ' - </a><a>' + response.state.text +'</a></div><br>'
                 })
             }
         } else{
@@ -80,45 +133,12 @@
             var temp = cookies.split(":")
             console.log(temp)
             fetch("https://apis.tracker.delivery/carriers/" + temp[1] + "/tracks/" + temp[0]).then((response) => response.json()).then(response=>{
-                document.getElementById("element").innerHTML += '<a>' + temp[0] + ' - </a><a>' + response.state.text +' - </a><a href="https://tracker.delivery/#/' + temp[1] + '/' + temp[0] + '" target="_blank">자세히보기</a><br>'
+                var color = ""
+                if(response.state.text == "배달완료") color = "btn btn-success"
+                else color = "btn btn-warning"
+                document.getElementById("element").innerHTML += '<div onclick="window.open(' + "'https://tracker.delivery/#/" + temp[1] + '/' + temp[0] + "'" + ')" class="stats ' + color + '"><a>' + temp[0] + ' - </a><a>' + response.state.text +'</a></div><br>'
             })
         }
     </script>
-    <input id="DTSnumber" type="number" inputmode="numeric" placeholder="송장번호" required>
-    <br>
-    <!-- <input id="DTSdelivery" type="text" placeholder="배송회사 코드"> -->
-    <select id="DTSdelivery">
-        <option value="de.dhl">DHL</option>
-        <option value="jp.sagawa">Sagawa</option>
-        <option value="jp.yamato">Kuroneko Yamato</option>
-        <option value="jp.yuubin">Japan Post</option>
-        <option value="kr.chunilps">천일택배</option>
-        <option value="kr.cjlogistics">CJ대한통운</option>
-        <option value="kr.cupost">CU 편의점택배</option>
-        <option value="kr.cvsnet">GS Postbox 택배</option>
-        <option value="kr.cway">CWAY (Woori Express)</option>
-        <option value="kr.daesin">대신택배</option>
-        <option value="kr.epost">우체국 택배</option>
-        <option value="kr.hanips">한의사랑택배</option>
-        <option value="kr.hanjin">한진택배</option>
-        <option value="kr.hdexp">합동택배</option>
-        <option value="kr.homepick">홈픽</option>
-        <option value="kr.honamlogis">한서호남택배</option>
-        <option value="kr.ilyanglogis">일양로지스</option>
-        <option value="kr.kdexp">경동택배</option>
-        <option value="kr.kunyoung">건영택배</option>
-        <option value="kr.logen">로젠택배</option>
-        <option value="kr.lotte">롯데택배</option>
-        <option value="kr.slx">SLX</option>
-        <option value="kr.swgexp">성원글로벌카고</option>
-        <option value="nl.tnt">TNT</option>
-        <option value="un.upu.ems">EMS</option>
-        <option value="us.fedex">Fedex</option>
-        <option value="us.ups">UPS</option>
-        <option value="us.usps">USPS</option>
-    </select>
-    <br>
-    <input type="button" onclick="saveCookie()" value="등록하기">
-    <input type="button" onclick="delCookie()" value="모두 지우기">
 </body>
 </html>
