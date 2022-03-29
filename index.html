@@ -63,9 +63,9 @@
         }
         console.log(getCookie("DTSvalue"))
         console.log(cookies)
-        for(var i in cookies){
+        for(var i=0; i<cookies.length; i++){
             console.log(i)
-            var temp = i.split(":")
+            var temp = cookies[i].split(":")
             console.log(temp)
             document.getElementById("element").innerHTML += '<a href="https://tracker.delivery/#/' + temp[1] + '/' + temp[0] + '" target="_blank">' + temp[0] + '</a><br>'
         }
