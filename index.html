@@ -127,6 +127,12 @@
         }
         function alerts(thisid){
             fetch("https://apis.tracker.delivery/carriers/" + document.getElementById('_' + thisid).innerText + "/tracks/" + thisid).then((response) => response.json()).then(response=>{
+                var now = new Date(response.from.time);
+                console.log(date);
+                var sudokun = new Date(now.setDate(now.getDate() + 2));
+                var zibang = new Date(now.setDate(now.getDate() + 3));
+                console.log(sudokun);
+                console.log(zibang);
                 Swal.fire({
                     html: `<a>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일 : ${response.from.time.substring(0, 10)} + 2~3일`
                 })
