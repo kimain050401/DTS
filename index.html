@@ -92,13 +92,24 @@
             // console.log(willCookie);
         }
         function delCookie(){
-            var date = new Date();
-            date.setDate(date.getDate() + 7);
-            var willCookie = "";
-            willCookie += "DTSvalue=" + ";";
-            willCookie += "expires=" + date.toUTCString();
-            document.cookie = willCookie;
-            location.reload();
+            Swal.fire({
+                info: 'info',
+                title: '정말 모든 운송장을 삭제하시겠어요?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: '취소',
+                denyButtonText: `모두 삭제`,
+            }).then((result) => {
+                if (result.isDenied) {
+                    var date = new Date();
+                    date.setDate(date.getDate() + 7);
+                    var willCookie = "";
+                    willCookie += "DTSvalue=" + ";";
+                    willCookie += "expires=" + date.toUTCString();
+                    document.cookie = willCookie;
+                    location.reload();
+                }
+            })
         }
         function delDTSvalue(thisid){
             var loaddata = getCookie("DTSvalue");
