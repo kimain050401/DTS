@@ -128,7 +128,7 @@
         function alerts(thisid){
             fetch("https://apis.tracker.delivery/carriers/" + document.getElementById('_' + thisid).innerText + "/tracks/" + thisid).then((response) => response.json()).then(response=>{
                 var now = new Date(response.from.time);
-                console.log(date);
+                console.log(now);
                 var sudokun = new Date(now.setDate(now.getDate() + 2));
                 var zibang = new Date(now.setDate(now.getDate() + 3));
                 console.log(sudokun);
