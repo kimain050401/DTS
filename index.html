@@ -130,11 +130,11 @@
                 var now = new Date(response.from.time);
                 console.log(now);
                 var sudokun = new Date(now.setDate(now.getDate() + 2));
-                var zibang = new Date(now.setDate(now.getDate() + 3));
+                var zibang = new Date(now.setDate(now.getDate() + 1));
                 console.log(sudokun);
                 console.log(zibang);
                 Swal.fire({
-                    html: `<a>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일 : ${response.from.time.substring(0, 10)} + 2~3일`
+                    html: `<a>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear}년 ${sudokun.getMonth}월 ${sudokun.getDate}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear}년 ${zibang.getMonth}월 ${zibang.getDate}일`
                 })
             })
         }
