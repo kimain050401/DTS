@@ -28,6 +28,14 @@
         svg:hover{
             fill: #7d8388;
         }
+        table {
+            width: 100% !important;
+            border: 1px solid black !important;
+            border-collapse: collapse !important;
+        }
+        th, td {
+            border: 1px solid black !important;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>    
@@ -129,12 +137,20 @@
             fetch("https://apis.tracker.delivery/carriers/" + document.getElementById('_' + thisid).innerText + "/tracks/" + thisid).then((response) => response.json()).then(response=>{
                 var now = new Date(response.from.time);
                 console.log(now);
-                var sudokun = new Date(now.setDate(now.getDate() + 2));
-                var zibang = new Date(now.setDate(now.getDate() + 1));
+                var sudokun = new Date(now.setDate(now.getDate() + 1));
+                var zibang = new Date(now.setDate(now.getDate() + 2));
                 console.log(sudokun);
                 console.log(zibang);
+                var texts = "<table>"
+                response.progresses.reverse().forEach(progress => {
+                    console.log(progress)
+                    var now = new Date(progress.time);
+                    var times = new Date(+now + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/, '');
+                    texts = texts + `<tr><td>${times}</td><td>${progress.status.text}</td><td>${progress.location.name}</td><td>${progress.description}</td></tr>`
+                })
+                texts = texts + "</table><br>"
                 Swal.fire({
-                    html: `<a>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear}년 ${sudokun.getMonth}월 ${sudokun.getDate}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear}년 ${zibang.getMonth}월 ${zibang.getDate}일`
+                    html: `<a>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()}월 ${zibang.getDate()}일</a><br><br>` + texts
                 })
             })
         }
@@ -201,7 +217,7 @@
                 document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="alerts(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>' + '<svg id="' + temp[0] + '" onclick="copy(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><svg id="+' + temp[0] + '" onclick="delDTSvalue(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg><br>';
             })
             .catch(error => {
-                document.getElementById("element").innerHTML += '<div onclick="notFoundNumber()" class="stats btn btn-danger"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>잘못된 운송장</a></div>';
+                document.getElementById("element").innerHTML += '<div onclick="notFoundNumber()" class="stats btn btn-danger"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>운송장오류</a></div>';
                 document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="notFoundNumber()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>' + '<svg id="' + temp[0] + '" onclick="notFoundNumber()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><svg id="+' + temp[0] + '" onclick="delDTSvalue(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg><br>';
             });
         });
@@ -217,7 +233,7 @@
                 document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="alerts(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>' + '<svg id="' + temp[0] + '" onclick="copy(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><svg id="+' + temp[0] + '" onclick="delDTSvalue(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg><br>';
             })
             .catch(error => {
-                document.getElementById("element").innerHTML += '<div onclick="notFoundNumber()" class="stats btn btn-danger"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>잘못된 운송장</a></div>';
+                document.getElementById("element").innerHTML += '<div onclick="notFoundNumber()" class="stats btn btn-danger"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>운송장오류</a></div>';
                 document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="notFoundNumber()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>' + '<svg id="' + temp[0] + '" onclick="notFoundNumber()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><svg id="+' + temp[0] + '" onclick="delDTSvalue(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg><br>';
             });
         }
