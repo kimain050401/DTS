@@ -1,2 +1,2 @@
-# KDTS
-Korea Delivery Tracking Service
+# DTS
+Delivery Tracking Service
