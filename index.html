@@ -63,6 +63,9 @@
                 .then(response => {
                     var sel = document.getElementById("DTSdelivery");
                     for(var i=0; i<sel.length; i++){
+                        console.log("===============")
+                        console.log(delivery)
+                        console.log(sel[i].value)
                         if(sel[i].value == delivery){
                             console.log("Success")
                             sel[i].selected = true;
