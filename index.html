@@ -278,6 +278,8 @@
             .catch(function(err) {
                 notFoundNumber()
             });
+        } else if(String(deliverycode) != "undefined" || String(deliverycompany) != "undefined"){
+            notFoundNumber()
         }
     </script>
 </body>
