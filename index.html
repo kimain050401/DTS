@@ -253,6 +253,32 @@
                 });
             }
         }
+        let deliverycode = Object.fromEntries((new URLSearchParams(window.location.search)).entries())['deliverycode'];
+        let deliverycompany = Object.fromEntries((new URLSearchParams(window.location.search)).entries())['deliverycompany'];
+        if(String(deliverycode) != "undefined" && String(deliverycompany) != "undefined"){
+            fetch("https://apis.tracker.delivery/carriers/" + deliverycompany + "/tracks/" + deliverycode).then((response) => response.json()).then(response=>{
+                var now = new Date(response.from.time);
+                console.log(now);
+                var sudokun = new Date(now.setDate(now.getDate() + 1));
+                var zibang = new Date(now.setDate(now.getDate() + 2));
+                console.log(sudokun);
+                console.log(zibang);
+                var texts = "<table>"
+                response.progresses.reverse().forEach(progress => {
+                    console.log(progress)
+                    var now = new Date(progress.time);
+                    var times = new Date(+now + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/, '');
+                    texts = texts + `<tr><td>${times}</td><td>${progress.status.text}</td><td>${progress.location.name}</td><td>${progress.description}</td></tr>`
+                })
+                texts = texts + "</table><br>"
+                Swal.fire({
+                    html: `<a>운송장 번호 : ${deliverycode}<br>운송사 : ${deliverycompany}<br><br>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()}월 ${zibang.getDate()}일</a><br><br>` + texts
+                })
+            })
+            .catch(function(err) {
+                notFoundNumber()
+            });
+        }
     </script>
 </body>
 </html>
