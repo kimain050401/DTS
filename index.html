@@ -272,12 +272,41 @@
                 })
                 texts = texts + "</table><br>"
                 Swal.fire({
-                    html: `<a>운송장 번호 : ${deliverycode}<br>운송사 : ${deliverycompany}<br><br>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()}월 ${zibang.getDate()}일</a><br><br>` + texts
+                    html: `<a>운송장 번호 : ${deliverycode}<br>운송사 : ${deliverycompany}<br><br>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()}월 ${zibang.getDate()}일</a><br><br>` + texts,
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: '확인',
+                    denyButtonText: '이 운송장 등록하기',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://dts.kimain.me"
+                    } else if (result.isDenied) {
+                        if(getCookie("DTSvalue").includes(deliverycode) == true){
+                            Swal.fire({
+                                icon: 'error',
+                                title: '이미 존재하는 운송장 번호입니다.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            return;
+                        }
+                        var date = new Date();
+                        date.setDate(date.getDate() + 7);
+                        var willCookie = "";
+                        if(getCookie("DTSvalue") != ""){
+                            willCookie += "DTSvalue=" + getCookie("DTSvalue") + "$" + deliverycode + ":" + deliverycompany + ";";
+                        } else{
+                            willCookie += "DTSvalue=" + deliverycode + ":" + deliverycompany + ";";
+                        }
+                        willCookie += "expires=" + date.toUTCString();
+                        document.cookie = willCookie;
+                        window.location.href = "https://dts.kimain.me"
+                    }
                 })
             })
             .catch(function(err) {
                 Swal.fire({
-                    text: "잘못된 운송장 번호를 입력하셨기에 운송장을 찾을 수 없습니다. 다시 확인해주세요.."
+                    text: "잘못된 운송장 번호를 입력하셨기에 운송장을 찾을 수 없습니다. 다시 확인해주세요."
                 })
             });
         } else if(String(deliverycode) != "undefined" || String(deliverycompany) != "undefined"){
