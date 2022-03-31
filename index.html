@@ -58,13 +58,11 @@
         }
         function loadALLData(){
             deliveryarr = ["kr.cjlogistics", "kr.epost", "kr.hanjin", "kr.logen", "kr.lotte", "kr.kdexp", "kr.hdexp", "kr.ilyanglogis", "de.dhl", "un.upu.ems", "us.ups", "us.usps", "nl.tnt", "us.fedex", "kr.swgexp", "kr.cupost", "kr.cvsnet", "kr.chunilps", "kr.cway", "kr.daesin", "kr.hanips", "kr.homepick", "kr.honamlogis", "kr.kunyoung", "kr.slx", "jp.sagawa", "jp.yamato", "jp.yuubin"]
-            deliveryarr.forEach(delivery => {
+            deliveryarr.reverse().forEach(delivery => {
                 axios.get(`https://apis.tracker.delivery/carriers/${delivery}/tracks/${document.getElementById("DTSnumber").value}`)
                 .then(response => {
-                    console.log(sel.length-1)
                     var sel = document.getElementById("DTSdelivery");
-                    for(var i=sel.length-1; i>=0; i--){
-                        console.log(i)
+                    for(var i=0; i<sel.length; i++){
                         if(sel[i].value == delivery){
                             console.log("Success")
                             sel[i].selected = true;
