@@ -162,8 +162,9 @@
                 texts = texts + "</table><br>"
                 var sel = document.getElementById("DTSdelivery");
                 for(var i=0; i<sel.length; i++){
-                    if(sel[i].value == temp[1]){
+                    if(sel[i].value == document.getElementById('_' + thisid).innerText){
                         sel[i].selected = true;
+                        break;
                     }
                 }
                 Swal.fire({
@@ -239,6 +240,7 @@
                     for(var i=0; i<sel.length; i++){
                         if(sel[i].value == temp[1]){
                             sel[i].selected = true;
+                            break;
                         }
                     }
                     document.getElementById("element").innerHTML += '<div id="' + temp[0] + '" onclick="alerts(this.id)" class="stats ' + color + '"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>' + response.data.state.text +'</a></div>';
@@ -263,6 +265,7 @@
                     for(var i=0; i<sel.length; i++){
                         if(sel[i].value == temp[1]){
                             sel[i].selected = true;
+                            break;
                         }
                     }
                     document.getElementById("element").innerHTML += '<div id="' + temp[0] + '" onclick="alerts(this.id)" class="stats ' + color + '"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>' + response.data.state.text +'</a></div>';
@@ -298,6 +301,7 @@
                 for(var i=0; i<sel.length; i++){
                     if(sel[i].value == deliverycompany){
                         sel[i].selected = true;
+                        break;
                     }
                 }
                 Swal.fire({
