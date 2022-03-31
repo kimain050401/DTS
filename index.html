@@ -160,9 +160,16 @@
                     texts = texts + `<tr><td>${times}</td><td>${progress.status.text}</td><td>${progress.location.name}</td><td>${progress.description}</td></tr>`
                 })
                 texts = texts + "</table><br>"
+                var sel = document.getElementById("DTSdelivery");
+                for(var i=0; i<sel.length; i++){
+                    if(sel[i].value == temp[1]){
+                        sel[i].selected = true;
+                    }
+                }
                 Swal.fire({
-                    html: `<a>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()}월 ${zibang.getDate()}일</a><br><br>` + texts
+                    html: `<a>운송장 번호 : ${thisid}<br>운송사 : ${document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text}<br><br><a>받는 분 : ${response.to.name}<br>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()}월 ${zibang.getDate()}일</a><br><br>` + texts
                 })
+                document.getElementById("DTSdelivery")[0].selected = true;
             })
         }
         function notFoundNumber(){
