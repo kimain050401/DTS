@@ -226,7 +226,7 @@
                 axios.get(`https://apis.tracker.delivery/carriers/${temp[1]}/tracks/${temp[0]}`)
                 .then(response => {
                     let color = "";
-                    if(response.data.state.text === '배달완료') color = 'btn btn-success';
+                    if(response.data.state.text.includes("완료") === true) color = 'btn btn-success';
                     else color = 'btn btn-warning';
                     var sel = document.getElementById("DTSdelivery");
                     for(var i=0; i<sel.length; i++){
