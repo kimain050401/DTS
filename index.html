@@ -59,11 +59,11 @@
         function loadALLData(){
             deliveryarr = ["kr.cjlogistics", "kr.epost", "kr.hanjin", "kr.logen", "kr.lotte", "kr.kdexp", "kr.hdexp", "kr.ilyanglogis", "de.dhl", "un.upu.ems", "us.ups", "us.usps", "nl.tnt", "us.fedex", "kr.swgexp", "kr.cupost", "kr.cvsnet", "kr.chunilps", "kr.cway", "kr.daesin", "kr.hanips", "kr.homepick", "kr.honamlogis", "kr.kunyoung", "kr.slx", "jp.sagawa", "jp.yamato", "jp.yuubin"]
             deliveryarr.forEach(delivery => {
-                axios.get(`https://apis.tracker.delivery/carriers/${delivery.id}/tracks/${document.getElementById("DTSnumber").value}`)
+                axios.get(`https://apis.tracker.delivery/carriers/${delivery}/tracks/${document.getElementById("DTSnumber").value}`)
                 .then(response => {
                     var sel = document.getElementById("DTSdelivery");
                     for(var i=0; i<sel.length; i++){
-                        if(sel[i].value == delivery.id){
+                        if(sel[i].value == delivery){
                             sel[i].selected = true;
                             return;
                         }
