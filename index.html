@@ -302,7 +302,9 @@
                 var sudokun = new Date(now.setDate(now.getDate() + 1));
                 var zibang = new Date(now.setDate(now.getDate() + 2));
                 console.log(sudokun);
+                console.log(sudokun.getMonth());
                 console.log(zibang);
+                console.log(zibang.getMonth());
                 var texts = "<table>"
                 response.progresses.reverse().forEach(progress => {
                     console.log(progress)
