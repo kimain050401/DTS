@@ -57,23 +57,21 @@
             return unescape(cValue);
         }
         function loadALLData(){
-            console.log("NiceNiceNiceNiceNiceNiceNiceNiceNiceNiceNiceNicesa")
-            fetch("https://apis.tracker.delivery/carriers").then((response) => response.json()).then(response=>{
-                response.forEach(delivery => {
-                    axios.get(`https://apis.tracker.delivery/carriers/${delivery.id}/tracks/${document.getElementById("DTSnumber").value}`)
-                    .then(response => {
-                        var sel = document.getElementById("DTSdelivery");
-                        for(var i=0; i<sel.length; i++){
-                            if(sel[i].value == delivery.id){
-                                sel[i].selected = true;
-                                return;
-                            }
+            deliveryarr = ["kr.cjlogistics", "kr.epost", "kr.hanjin", "kr.logen", "kr.lotte", "kr.kdexp", "kr.hdexp", "kr.ilyanglogis", "de.dhl", "un.upu.ems", "us.ups", "us.usps", "nl.tnt", "us.fedex", "kr.swgexp", "kr.cupost", "kr.cvsnet", "kr.chunilps", "kr.cway", "kr.daesin", "kr.hanips", "kr.homepick", "kr.honamlogis", "kr.kunyoung", "kr.slx", "jp.sagawa", "jp.yamato", "jp.yuubin"]
+            deliveryarr.forEach(delivery => {
+                axios.get(`https://apis.tracker.delivery/carriers/${delivery.id}/tracks/${document.getElementById("DTSnumber").value}`)
+                .then(response => {
+                    var sel = document.getElementById("DTSdelivery");
+                    for(var i=0; i<sel.length; i++){
+                        if(sel[i].value == delivery.id){
+                            sel[i].selected = true;
+                            return;
                         }
-                    })
-                    .catch(error => {
-                        console.log("Error")
-                    });
+                    }
                 })
+                .catch(error => {
+                    console.log("Error")
+                });
             })
         }
         function saveCookie(){
