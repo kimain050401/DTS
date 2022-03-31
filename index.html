@@ -276,10 +276,14 @@
                 })
             })
             .catch(function(err) {
-                notFoundNumber()
+                Swal.fire({
+                    text: "잘못된 운송장 번호를 입력하셨기에 운송장을 찾을 수 없습니다. 다시 확인해주세요.."
+                })
             });
         } else if(String(deliverycode) != "undefined" || String(deliverycompany) != "undefined"){
-            notFoundNumber()
+            Swal.fire({
+                text: "잘못된 운송장 번호를 입력하셨기에 운송장을 찾을 수 없습니다. 다시 확인해주세요."
+            })
         }
     </script>
 </body>
