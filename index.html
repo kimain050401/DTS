@@ -228,6 +228,12 @@
                     let color = "";
                     if(response.data.state.text === '배달완료') color = 'btn btn-success';
                     else color = 'btn btn-warning';
+                    var sel = document.getElementById("DTSdelivery");
+                    for(var i=0; i<sel.length; i++){
+                        if(sel[i].value == temp[1]){
+                            sel[i].selected = true;
+                        }
+                    }
                     document.getElementById("element").innerHTML += '<div id="' + temp[0] + '" onclick="alerts(this.id)" class="stats ' + color + '"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>' + response.data.state.text +'</a></div>';
                     document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="copy(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><svg id="+' + temp[0] + '" onclick="delDTSvalue(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg><br>';
                 })
@@ -236,6 +242,8 @@
                     document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="notFoundNumber()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><svg id="+' + temp[0] + '" onclick="delDTSvalue(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg><br>';
                 });
             });
+            var sel = document.getElementById("DTSdelivery");
+            sel[0].selected = true;
             } else {
                 var cookies = getCookie("DTSvalue");
                 const temp = cookies.split(":");
@@ -244,6 +252,12 @@
                     let color = "";
                     if(response.data.state.text === '배달완료') color = 'btn btn-success';
                     else color = 'btn btn-warning';
+                    var sel = document.getElementById("DTSdelivery");
+                    for(var i=0; i<sel.length; i++){
+                        if(sel[i].value == temp[1]){
+                            sel[i].selected = true;
+                        }
+                    }
                     document.getElementById("element").innerHTML += '<div id="' + temp[0] + '" onclick="alerts(this.id)" class="stats ' + color + '"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>' + response.data.state.text +'</a></div>';
                     document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="copy(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><svg id="+' + temp[0] + '" onclick="delDTSvalue(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg><br>';
                 })
@@ -251,6 +265,8 @@
                     document.getElementById("element").innerHTML += '<div onclick="notFoundNumber()" class="stats btn btn-danger"><a>' + document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text + " - " + temp[0] + ' - </a><a id="_' + temp[0] + '" style="display: none;">' + temp[1] + '</a><a>운송장오류</a></div>';
                     document.getElementById("element").innerHTML += '<svg id="' + temp[0] + '" onclick="notFoundNumber()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M568.9 143.5l-150.9-138.2C404.8-6.773 384 3.039 384 21.84V96C241.2 97.63 128 126.1 128 260.6c0 54.3 35.2 108.1 74.08 136.2c12.14 8.781 29.42-2.238 24.94-16.46C186.7 252.2 256 224 384 223.1v74.2c0 18.82 20.84 28.59 34.02 16.51l150.9-138.2C578.4 167.8 578.4 152.2 568.9 143.5zM416 384c-17.67 0-32 14.33-32 32v31.1l-320-.0013V128h32c17.67 0 32-14.32 32-32S113.7 64 96 64H64C28.65 64 0 92.65 0 128v319.1c0 35.34 28.65 64 64 64l320-.0013c35.35 0 64-28.66 64-64V416C448 398.3 433.7 384 416 384z"/></svg><svg id="+' + temp[0] + '" onclick="delDTSvalue(this.id)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg><br>';
                 });
+                var sel = document.getElementById("DTSdelivery");
+                sel[0].selected = true;
             }
         }
         let deliverycode = Object.fromEntries((new URLSearchParams(window.location.search)).entries())['deliverycode'];
