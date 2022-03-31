@@ -168,7 +168,7 @@
                     }
                 }
                 Swal.fire({
-                    html: `<a>운송사 : ${document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text}</a><a><br>운송장 번호 : ${thisid}</a><br><br><a>받는 분 : ${response.to.name}</a><br><a>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()}월 ${zibang.getDate()}일</a><br><br>` + texts
+                    html: `<a>운송사 : ${document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text}</a><a><br>운송장 번호 : ${thisid}</a><br><br><a>받는 분 : ${response.to.name}</a><br><a>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()+1}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()+1}월 ${zibang.getDate()}일</a><br><br>` + texts
                 })
                 document.getElementById("DTSdelivery")[0].selected = true;
             })
@@ -185,6 +185,7 @@
     <div style="display: inline-block;">
         <div class="input-group" style="width: fit-content;">
             <select id="DTSdelivery" class="form-select" style="width: fit-content;">
+                <option value="option">운송사를 선택하세요</option>
                 <option value="kr.cjlogistics">CJ대한통운</option>
                 <option value="kr.epost">우체국 택배</option>
                 <option value="kr.hanjin">한진택배</option>
@@ -302,9 +303,7 @@
                 var sudokun = new Date(now.setDate(now.getDate() + 1));
                 var zibang = new Date(now.setDate(now.getDate() + 2));
                 console.log(sudokun);
-                console.log(sudokun.getMonth());
                 console.log(zibang);
-                console.log(zibang.getMonth());
                 var texts = "<table>"
                 response.progresses.reverse().forEach(progress => {
                     console.log(progress)
@@ -321,7 +320,7 @@
                     }
                 }
                 Swal.fire({
-                    html: `<a>운송사 : ${document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text}</a><a><br>운송장 번호 : ${deliverycode}</a><br><br><a>받는 분 : ${response.to.name}</a><br><a>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()}월 ${zibang.getDate()}일</a><br><br>` + texts,
+                    html: `<a>운송사 : ${document.getElementById('DTSdelivery').options[document.getElementById('DTSdelivery').selectedIndex].text}</a><a><br>운송장 번호 : ${deliverycode}</a><br><br><a>받는 분 : ${response.to.name}</a><br><a>보내신 분 : ${response.from.name}</a><br><br><a>배송 예정일(수도권) : ${sudokun.getFullYear()}년 ${sudokun.getMonth()+1}월 ${sudokun.getDate()}일</a><br><a>배송 예정일(지방) : ${zibang.getFullYear()}년 ${zibang.getMonth()+1}월 ${zibang.getDate()}일</a><br><br>` + texts,
                     showDenyButton: true,
                     showCancelButton: false,
                     confirmButtonText: '확인',
