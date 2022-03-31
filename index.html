@@ -55,7 +55,26 @@
             }
             return unescape(cValue);
         }
+        function loadALLData(){
+            fetch("https://apis.tracker.delivery/carriers").then((response) => response.json()).then(response=>{
+                response.forEach(delivery => {
+                    fetch("https://apis.tracker.delivery/carriers/" + response.id + "/tracks/" + document.getElementById("DTSnumber").value).then((response2) => response2.json()).then(response2=>{
+                        var sel = document.getElementById("DTSdelivery");
+                        for(var i=0; i<sel.length; i++){
+                            if(sel[i].value == response.id){
+                                sel[i].selected = true;
+                                return;
+                            }
+                        }
+                    })
+                })
+            })
+        }
         function saveCookie(){
+            if(document.getElementById("DTSdelivery").value == "option"){
+                loadALLData();
+                return;
+            }
             if(document.getElementById("DTSnumber").value == ""){
                 Swal.fire({
                     icon: 'error',
