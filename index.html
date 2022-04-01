@@ -61,6 +61,7 @@
             deliveryarr.reverse().forEach(delivery => {
                 axios.get(`https://apis.tracker.delivery/carriers/${delivery}/tracks/${document.getElementById("DTSnumber").value}`)
                 .then(response => {
+                    console.log(delivery)
                     var sel = document.getElementById("DTSdelivery");
                     for(var i=0; i<sel.length; i++){
                         if(sel[i].value == delivery){
