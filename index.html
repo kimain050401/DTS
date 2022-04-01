@@ -86,6 +86,7 @@
             }
         }
         function saveCookie(){
+            numberCheck()
             if(document.getElementById("DTSnumber").value == ""){
                 Swal.fire({
                     icon: 'error',
@@ -219,6 +220,12 @@
                 document.getElementById("submit").value = "등록하기"
             }
         }
+        function numberCheck(){
+            var testString = document.getElementById("DTSnumber").value;
+            var regex = /[^0-9]/g;
+            var result = testString.replace(regex, "");
+            document.getElementById("DTSnumber").value = result;
+        }
     </script>
     <br><br><br>
     <h2>DTS - Delivery Tracking Service</h2>
@@ -256,7 +263,7 @@
                 <option value="jp.yamato">Kuroneko Yamato</option>
                 <option value="jp.yuubin">Japan Post</option>
             </select>
-            <input class="form-control" style="width: fit-content;" id="DTSnumber" type="text" inputmode="numeric" placeholder="운송장 번호" required>
+            <input class="form-control" oninput="numberCheck()" style="width: fit-content;" id="DTSnumber" type="text" inputmode="numeric" placeholder="운송장 번호" required>
         </div>
     </div>
     <br>
