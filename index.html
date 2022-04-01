@@ -56,10 +56,10 @@
             }
             return unescape(cValue);
         }
-        function loadALLData(){
+        async function loadALLData(){
             var deliveryarr = ["kr.cjlogistics", "kr.epost", "kr.hanjin", "kr.logen", "kr.lotte", "kr.kdexp", "kr.hdexp", "kr.ilyanglogis", "de.dhl", "un.upu.ems", "us.ups", "us.usps", "nl.tnt", "us.fedex", "kr.swgexp", "kr.cupost", "kr.cvsnet", "kr.chunilps", "kr.cway", "kr.daesin", "kr.hanips", "kr.homepick", "kr.honamlogis", "kr.kunyoung", "kr.slx", "jp.sagawa", "jp.yamato", "jp.yuubin"]
             deliveryarr.reverse().forEach(delivery => {
-                axios.get(`https://apis.tracker.delivery/carriers/${delivery}/tracks/${document.getElementById("DTSnumber").value}`)
+                await axios.get(`https://apis.tracker.delivery/carriers/${delivery}/tracks/${document.getElementById("DTSnumber").value}`)
                 .then(response => {
                     console.log(delivery)
                     var sel = document.getElementById("DTSdelivery");
