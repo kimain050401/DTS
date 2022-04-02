@@ -289,8 +289,7 @@
                         }),
                     })
                     .then((response) => response.text()).then(response=>{
-                        console.log(response)
-                        if(response.ok) {
+                        if(response != "500") {
                             Swal.fire({
                                 icon: 'success',
                                 title: '성공적으로 동기화됨',
