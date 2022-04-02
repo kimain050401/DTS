@@ -226,6 +226,48 @@
             var result = testString.replace(regex, "");
             document.getElementById("DTSnumber").value = result;
         }
+        function saveServer(){
+            Swal.fire({
+                title: 'Submit your Github username',
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: '저장하기',
+                showLoaderOnConfirm: true,
+                preConfirm: (login) => {
+                    fetch("https://api.findflag.kr/dts/post", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            id: login,
+                            cookie: getCookie("DTSvalue")
+                        }),
+                    })
+                    .then(response => {
+                        if(response.ok) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '서버에 성공적으로 저장됨',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'fail',
+                            title: '서버에 저장하지 못함',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    })
+                }
+            })
+        }
     </script>
     <br><br><br>
     <h2>DTS - Delivery Tracking Service</h2>
@@ -268,6 +310,8 @@
     </div>
     <br>
     <input id="submit" class="btn btn-primary" style="margin-top: 10px;" type="button" onclick="saveCookie()" value="운송사 찾기">
+    <input class="btn btn-success" style="margin-top: 10px;" type="button" onclick="" value="[ID] 불러오기">
+    <input class="btn btn-success" style="margin-top: 10px;" type="button" onclick="" value="[ID] 저장하기">
     <input class="btn btn-danger" style="margin-top: 10px;" type="button" onclick="delCookie()" value="모두 지우기">
     <br><br><br>
     <a style="color: #84888b;">ⓘ 운송사를 모르겠다면 운송장 번호만 입력해보세요!</a>
