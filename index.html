@@ -271,11 +271,11 @@
         function readServer(){
             Swal.fire({
                 title: '동기화를 위해 ID를 입력해주세요.',
-                html: `<input type="text" id="uid" class="swal2-input" placeholder="ID">`,
+                html: `<a>기존의 운송장은 모두 덮어씌워집니다.</a><br><input type="text" id="uid" class="swal2-input" placeholder="ID">`,
                 showDenyButton: true,
                 showCancelButton: false,
                 confirmButtonText: '취소',
-                denyButtonText: `서버에 저장`,
+                denyButtonText: `동기화하기`,
             }).then((result) => {
                 if (result.isDenied) {
                     fetch("https://api.findflag.kr/dts/get", {
@@ -289,7 +289,7 @@
                         }),
                     })
                     .then(response => {
-                        alert(response.text)
+                        alert(response.text())
                         if(response.ok) {
                             Swal.fire({
                                 icon: 'success',
