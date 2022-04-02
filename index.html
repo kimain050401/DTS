@@ -288,8 +288,8 @@
                             id: Swal.getPopup().querySelector('#uid').value
                         }),
                     })
-                    .then(response => {
-                        alert(response.text())
+                    .then((response) => response.text()).then(response=>{
+                        console.log(response)
                         if(response.ok) {
                             Swal.fire({
                                 icon: 'success',
