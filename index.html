@@ -290,12 +290,6 @@
                     })
                     .then((response) => response.text()).then(response=>{
                         if(response.ok) {
-                            var date = new Date();
-                            date.setDate(date.getDate() + 7);
-                            var willCookie = "";
-                            willCookie += "DTSvalue=" + response + ";";
-                            willCookie += "expires=" + date.toUTCString();
-                            document.cookie = willCookie;
                             Swal.fire({
                                 icon: 'success',
                                 title: '성공적으로 동기화됨',
@@ -303,8 +297,21 @@
                                 timer: 1500
                             })
                             setTimeout(function() {
+                                var date = new Date();
+                                date.setDate(date.getDate() + 7);
+                                var willCookie = "";
+                                willCookie += "DTSvalue=" + response + ";";
+                                willCookie += "expires=" + date.toUTCString();
+                                document.cookie = willCookie;
                                 location.reload();
                             }, 1500);
+                        } else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: '동기화하지 못함',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         }
                     })
                     .catch(error => {
