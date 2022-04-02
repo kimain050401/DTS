@@ -228,22 +228,21 @@
         }
         function saveServer(){
             Swal.fire({
-                title: '서버 저장을 위해 ID를 입력해주세요.',
-                input: 'text',
-                inputAttributes: {
-                    autocapitalize: 'off'
-                },
-                showCancelButton: true,
-                confirmButtonText: '저장하기',
-                showLoaderOnConfirm: true,
-                preConfirm: (login) => {
+                title: '서버에 저장을 위해 ID를 입력해주세요.',
+                html: `<input type="text" id="uid" class="swal2-input" placeholder="ID">`,
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: '취소',
+                denyButtonText: `서버에 저장`,
+            }).then((result) => {
+                if (result.isDenied) {
                     fetch("https://api.findflag.kr/dts/post", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
-                            id: login,
+                            id: Swal.getPopup().querySelector('#uid').value,
                             cookie: getCookie("DTSvalue")
                         }),
                     })
@@ -259,7 +258,7 @@
                     })
                     .catch(error => {
                         Swal.fire({
-                            icon: 'fail',
+                            icon: 'error',
                             title: '서버에 저장하지 못함',
                             showConfirmButton: false,
                             timer: 1500
