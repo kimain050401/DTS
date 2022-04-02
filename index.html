@@ -238,8 +238,9 @@
                 if (result.isDenied) {
                     fetch("https://api.findflag.kr/dts/post", {
                         method: "POST",
+                        cache: 'no-cache',
                         headers: {
-                            "Content-Type": "application/json",
+                            'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         body: JSON.stringify({
                             id: Swal.getPopup().querySelector('#uid').value,
