@@ -228,7 +228,7 @@
         }
         function saveServer(){
             Swal.fire({
-                title: 'Submit your Github username',
+                title: '서버 저장을 위해 ID를 입력해주세요.',
                 input: 'text',
                 inputAttributes: {
                     autocapitalize: 'off'
@@ -311,7 +311,7 @@
     <br>
     <input id="submit" class="btn btn-primary" style="margin-top: 10px;" type="button" onclick="saveCookie()" value="운송사 찾기">
     <input class="btn btn-success" style="margin-top: 10px;" type="button" onclick="" value="[ID] 불러오기">
-    <input class="btn btn-success" style="margin-top: 10px;" type="button" onclick="" value="[ID] 저장하기">
+    <input class="btn btn-success" style="margin-top: 10px;" type="button" onclick="saveServer()" value="[ID] 저장하기">
     <input class="btn btn-danger" style="margin-top: 10px;" type="button" onclick="delCookie()" value="모두 지우기">
     <br><br><br>
     <a style="color: #84888b;">ⓘ 운송사를 모르겠다면 운송장 번호만 입력해보세요!</a>
