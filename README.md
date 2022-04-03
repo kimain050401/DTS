@@ -6,6 +6,6 @@ Delivery Tracking Service
 
 ## License
 
-Green Grass is available under the `GNU General Public License v3.0`.
+DTS is available under the `GNU General Public License v3.0`.
 
 See the LICENSE file for more info.
